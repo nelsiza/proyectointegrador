@@ -65,6 +65,7 @@ form{
     margin-top: 60px;
     width: 100%;
     display: flex;
+    gap: 10px;
 }
 input{
     flex: 1;
@@ -72,6 +73,8 @@ input{
     background: var(--secondaryBackground);
     border: 1px solid var(--purple);
     border-radius: 10px;
+    outline: none;
+    color: var(--teal);
 }
 button{
     width: 50px;
@@ -81,4 +84,8 @@ button{
     align-items: center;
     justify-content: center;
     background-color: var(--purple);
+    color: var(--text);
+    font-size: 30px;
+    font-weight: bold;
+    outline: none;
 }
