@@ -88,4 +88,40 @@ button{
     font-size: 30px;
     font-weight: bold;
     outline: none;
+    border: none;
+    cursor: pointer;
+}
+#task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+    width: 100%;
+    list-style: none;
+}
+.taskItem {
+    width: 100%;
+    display: flex;
+    background-color: var(--secondaryBackground);
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.task input {
+    width: 20px;
+    height: 20px;
+}
+.task.completed {
+    text-decoration: line-through;
+    color: var(--teal);
+}
+.taskItem img {
+    width: 24px;
+    height: 24px;
 }

@@ -7,9 +7,23 @@ const addTask = ()=> {
     if (text){
         tasks.push ({text:text, completed: false});
 
-        updateTasksList()
-        }
+        updateTasksList();         
 };
+
+const toogleTastCompete = (index) =>{
+    tasks[index].completed = !tasks[index].completed
+};
+
+const deleteTask = (index) => {
+    tasks.splice(index,1);
+    updateTasksList();
+};
+
+const editTask = (index)=> {
+    const tasksInput = dovument.getElementById('taskInput')
+    tasksInput.value =tasks[index].text
+    
+}
 
 const updateTasksList = ()=> {
     const tasksList = document.getElementById("Lista de Tareas")
@@ -21,12 +35,12 @@ const updateTasksList = ()=> {
     listItem.innerHTML = `
         <div class="taskItem">
             <div class="task ${task.completed ? 'completed':''}">
-                <input type="checkbox" class="checkbox" />
-                <p>Finish this project</p>
+                <input type="checkbox" class="checkbox"  ${task.completed ?"checked" : ""}/>
+                <p>${task.text}</p>
             </div>
             <div class="icons">
-                <img src="./img/edit.png" />
-                <img src="./img/bin.png" />
+                <img src="./img/edit.png" onClick="editTask(${index})" />
+                <img src="./img/bin.png" onClick="deleteTask(${index})" />
             </div>
         </div>    
      `;
