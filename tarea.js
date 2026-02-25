@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", ()=> {
-    const storedTasks = JSON.parse(localStorage.getItem('tasks'))
-
-    if(storedTasks){
-        storedTasks.forEach((tasks)=> tasks.push(tasks))
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    if(storedTasks) {
+        storedTasks.forEach((task) => tasks.push(task));
         updateTasksList();
         updateStats();
     }
-})
+});
+
 
 let tasks = [];
 
@@ -15,8 +15,8 @@ const saveTasks = ()=> {
 }
 
 const addTask = () => {
-    const tasksInput =document.getElementById ("Ingrese Tarea")
-    const text = tasksInput.Value.trim();
+    const tasksInput =document.getElementById ("taskInput")
+    const text = tasksInput.value.trim();
 
     if (text) {
         tasks.push({ text: text, completed: false });
@@ -27,7 +27,7 @@ const addTask = () => {
     }           
 };
 
-const toogleTastComplete = (index) => { 
+const toggleTasktComplete = (index) => { 
     tasks[index].completed = !tasks[index].completed;
     updateTasksList();
     updateStats();
@@ -51,50 +51,61 @@ const editTask = (index)=> {
     saveTasks();
 };    
 
-const updateStats = ()=>{
-    const completedTasks = tasks.filter(task=> task.completed).length
-    const totalTasks = tasks.length
-    const progress =( completedTasks/totalTasks )*100
-   const progressBar = document.getElementById('progress')
+const updateStats = () => {
+    const completedTasks = tasks.filter(task => task.completed).length;
+    const totalTasks = tasks.length;
+    const progress = totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
+    const progressBar = document.getElementById('progress');
    
-   progressBar.style.widows = `$(progress)`
+    if (progressBar) {
+        progressBar.style.width = `${progress}%`;
+    }    
 
-   document.getElementById("numbers").innerText = `${totalTasks}`;
-
-   if (tasks.length && completedTasks === totalTasks) {
+   const numbers = document.getElementById("numbers");
+   if (numbers) {
+        numbers.innerText = `${completedTasks}/${totalTasks}`;
+   } 
+   if (totalTasks > 0 && completedTasks === totalTasks) {
      blaskConfetti();
    }
-}
+};
 
 const updateTasksList = () => {
     const tasksList = document.getElementById("task-list");
+    if (!tasksList) return;
+
+
     tasksList.innerHTML = "";
-}
+
 
     tasks.forEach((task, index) => {
-        const listItem = document.createElement('li')
+        const listItem = document.createElement('li');
 
-    listItem.innerHTML = `
-        <div class="taskItem">
-            <div class="task ${task.completed ? 'completed':''}">
-                <input type="checkbox" class="checkbox"  ${task.completed ?"checked" : ""}/>
-                <p>${task.text}</p>
-            </div>
-            <div class="icons">
-                <img src="./img/edit.png" onClick="editTask(${index})" />
-                <img src="./img/bin.png" onClick="deleteTask(${index})" />
-            </div>
-        </div>    
-     `;
-     listItem.addEventListener("change", ()=> toggleTastComplete(index));
+
+        listItem.innerHTML = `
+             <div class="taskItem">
+                 <div class="task ${task.completed ? 'completed':''}">
+                        <input type="checkbox" class="checkbox" ${task.completed ? "checked" : ""}/>
+                        <p>${task.text}</p>
+                 </div>
+                 <div class="icons">
+                        <img src="./img/edit.png" onClick="editTask(${index})" alt="Edit" />
+                        <img src="./img/bin.png" onClick="deleteTask(${index})"alt="Delete" />
+                 </div>
+             </div>    
+         `;
+     
+     listItem.querySelector(".checkbox").addEventListener("change", () => toggleTasktComplete(index));
+     
      tasksList.append(listItem);
     });
 };   
 
-document.getElementById("Nueva Tarea").addEventListener("clikc", function (e) { e.preventDefault();
-
-addTask();
+document.getElementById("task-form").addEventListener("submit", function (e) { 
+    e.preventDefault();
+    addTask();
 });
+
 
 const blaskConfetti = ()=> {
     const defaults = {
@@ -126,4 +137,4 @@ const blaskConfetti = ()=> {
       setTimeout(shoot, 0);
       setTimeout(shoot, 100);
       setTimeout(shoot, 200);
-}
+};

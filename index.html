@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista Pendiente</title>
     <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <div class="container"></div>
-       <div class="stats-container"></div>
-           <div class="details"></div>
-              <h1>Lista Pendiente</h1>
-              <p>Avanza</p>
-              <div id="progressBar"></div>
+    <div class="container">
+       <div class="stats-container">           
+            <div class="details">
+              <h1>Tareas Pendientes</h1>
+              <p>Sigue asi, vas por buen camino</p>
+              <div id="progressBar">
                  <div id="progress"></div>
-              <div>
-           <div class="stats-numbers"></div>
-           <p id="numbers">0 / 0</p>
-        <div>
-            <form action="">
-              <input type="text" id="taskInput" placeholder="Escriba Su tarea">
-              <button id="Nueva Tarea" type="submit">+</button> 
+              </div>
+            </div>   
+            <div id="numbers">0 / 0</div>
+        </div>
+
+         <form id="task-form">
+              <input type="text" id="taskInput" placeholder="Escribe una tarea..."/>
+              <button id="newTask" type="submit">+</button> 
             </form>
-            <ul class="Lista de Tareas"></ul>
-    </div>      
+
+            <ul id="task-list"></ul>
+    </div>  
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script src="./tarea.js"></script>
 </body>
 </html>
