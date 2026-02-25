@@ -1,33 +1,71 @@
+document.addEventListener("DOMContentLoaded", ()=> {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'))
+
+    if(storedTasks){
+        storedTasks.forEach((tasks)=> tasks.push(tasks))
+        updateTasksList();
+        updateStats();
+    }
+}
+
 let tasks = [];
 
-const addTask = ()=> {
+const saveTasks = ()=> {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
+const addTask = () => {
     const tasksInput =document.getElementById ("Ingrese Tarea")
-    const text = tasksInput.ariaValueMax.trim()
+    const text = tasksInput.Value.trim();
 
-    if (text){
-        tasks.push ({text:text, completed: false});
-
-        updateTasksList();         
+    if (text) {
+        tasks.push({ text: text, completed: false });
+        tasksInput.value = "";
+        updateTasksList();  
+        updateStats();
+        saveTasks();
+    }           
 };
 
-const toogleTastCompete = (index) =>{
-    tasks[index].completed = !tasks[index].completed
+const toogleTastComplete = (index) => { 
+    tasks[index].completed = !tasks[index].completed;
+    updateTasksList();
+    updateStats();
+    saveTasks();
 };
 
 const deleteTask = (index) => {
-    tasks.splice(index,1);
+    tasks.splice(index, 1);
     updateTasksList();
+    updateStats();
+    saveTasks();
 };
 
 const editTask = (index)=> {
-    const tasksInput = dovument.getElementById('taskInput')
-    tasksInput.value =tasks[index].text
+    const tasksInput = document.getElementById('taskInput');
+    tasksInput.value = tasks[index].text;
     
+    tasks.splice(index, 1);
+    updateTasksList();
+    updateStats();
+    saveTasks();
+};    
+
+const updateStats = ()=>{
+    const completedTasks = tasks.filter(task=> task.completed).length
+    const totalTasks = tasks.length
+    const progress =( completedTasks/totalTasks )*100
+   const progressBar = document.getElementById('progress')
+   
+   progressBar.style.widows = `$(progress)`
+
+   document.getElementById('numbers').innerText = `${totalTasks}`;
 }
 
-const updateTasksList = ()=> {
-    const tasksList = document.getElementById("Lista de Tareas")
-    tasksList.innerHTML = ''
+const updateTasksList = () => {
+    const tasksList = document.getElementById("task-list");
+    tasksList.innerHTML = "";
+}
 
     tasks.forEach((task, index) => {
         const listItem = document.createElement('li')
@@ -52,6 +90,7 @@ const updateTasksList = ()=> {
     };
 
 
-document.genElemenById("Nueva Tarea").addEventListener("clikc" function e.preventDefault();
+document.genElementById("Nueva Tarea").addEventListener("clikc" function (e) { e.preventDefault();
+
 addTask();
-})
+});
