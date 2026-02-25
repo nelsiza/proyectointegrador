@@ -3,14 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-:root{
-    --background: #000430;
-    --secondaryBackground: #171c48;
-    --text: #fff;
-    --purple: #828dff;
-    --teal: #24feee;
-}
-    body{
+    :root {
+        --background: #202124;           
+        --secondaryBackground: #303134;  
+        --text: #e8eaed;                 
+        --purple: #8ab4f8;               
+        --teal: #c2e7ff;                 
+    }
+    body {
         background-color: var(--background);
         color: var(--text);
     }
