@@ -21,11 +21,12 @@
         justify-content: center;
         margin: 120px auto 0 auto;
         max-width: 600px;
+        width: 100%;
         text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .stats-container {
-        padding: 100px;
-        border-radius: 50px;
+        padding: 80px;
+        border-radius: 80px;
         border: 2px solid var(--purple);
         display: flex;
         justify-content: space-between;
@@ -37,17 +38,20 @@
     }
     #progressBar {
         width: 100%;
-        height: 10px;
+        height: 12px;
         background-color: var(--secondaryBackground);
-        border-radius: 5px;
+        border-radius: 10px;
         margin-top: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(130,141,255,0.3); 
     }
     #progress{
-        width: 80%;
-        height: 10px;
+        width: 0%;
+        height: 100px;
         background-color: var(--teal);
+        box-shadow: 0 0 10px;
         border-radius: 10px;
-        transition: all 0.3s;
+        transition: width 0.4s ease-out;
     }
     #numbers {
         width: 100px; 
@@ -62,6 +66,8 @@
         font-weight: bold;
         text-align: center;
         line-height: 1;
+        padding: 10px;
+        white-space: nowrap;
 }
 form{
     margin-top: 60px;
@@ -94,49 +100,59 @@ button{
     cursor: pointer;
 }
 #task-list {
+    width: 100%;
+    padding: 0% !important;
+    margin: 30px 0 0 0;
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 30px;
-    width: 100%;
-    list-style: none;
+    gap: 10px;   
 }
 .taskItem {
-    width: 100%;
-    display: flex;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     background-color: var(--secondaryBackground);
-    padding: 10px;
+    padding: 10px 5px !important;
     border-radius: 10px;
-    justify-content: space-between;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+    box-sizing: border-box;
+}
+.icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 15px;
 }
 .task {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex !important; 
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 5px;
+    flex: 1 !important;
+    min-width: 0;
+}
+.task p {
+    margin: 0 !important;
+    text-align: left !important;
     flex: 1;
+}    
+.task img {
+    width: 20px;
+    height: 20px;
 }
 .task input {
     width: 20px;
     height: 20px;
+    margin: 0 !important;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 .task.completed {
     text-decoration: line-through;
     color: var(--teal);
 }
 .taskItem img {
-    width: 100%;
-    display: flex;
-    background-color: var(--secondaryBackground);
-    padding: 15px;
-    border-radius: 10px;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    width: 24px;
     height: 24px;
     cursor: pointer;
     transition: transform 0.2s ease, filter 0.2s ease;
