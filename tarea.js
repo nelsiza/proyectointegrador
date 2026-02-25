@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         updateTasksList();
         updateStats();
     }
-}
+})
 
 let tasks = [];
 
@@ -59,7 +59,11 @@ const updateStats = ()=>{
    
    progressBar.style.widows = `$(progress)`
 
-   document.getElementById('numbers').innerText = `${totalTasks}`;
+   document.getElementById("numbers").innerText = `${totalTasks}`;
+
+   if (tasks.length && completedTasks === totalTasks) {
+     blaskConfetti();
+   }
 }
 
 const updateTasksList = () => {
@@ -82,15 +86,44 @@ const updateTasksList = () => {
             </div>
         </div>    
      `;
-     listItem.addEventListener('change', ()=> toogleTastCompete(index));
-        tasksList.append(listItem);
+     listItem.addEventListener("change", ()=> toggleTastComplete(index));
+     tasksList.append(listItem);
     });
-    };
-        console.log(tasks);
-    };
+};   
 
-
-document.genElementById("Nueva Tarea").addEventListener("clikc" function (e) { e.preventDefault();
+document.getElementById("Nueva Tarea").addEventListener("clikc", function (e) { e.preventDefault();
 
 addTask();
 });
+
+const blaskConfetti = ()=> {
+    const defaults = {
+        spread: 360,
+        ticks: 50,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 30,
+        shapes: ["star"],
+        colors: ["FFE400", "FFBD00", "E89400", "FFCA6C", "FDFFB8"],
+      };
+      
+      function shoot() {
+        confetti({
+          ...defaults,
+          particleCount: 40,
+          scalar: 1.2,
+          shapes: ["star"],
+        });
+      
+        confetti({
+          ...defaults,
+          particleCount: 10,
+          scalar: 0.75,
+          shapes: ["circle"],
+        });
+      }
+      
+      setTimeout(shoot, 0);
+      setTimeout(shoot, 100);
+      setTimeout(shoot, 200);
+}
